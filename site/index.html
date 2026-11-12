@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="外销通用报表&数据看板UI 设计规范、组件、页面参考与图标库"
+    />
+    <title>外销通用报表&数据看板UI</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">跳到主要内容</a>
+    <header class="topbar">
+      <button
+        class="nav-toggle"
+        id="nav-toggle"
+        type="button"
+        aria-label="打开目录"
+        aria-controls="sidebar"
+        aria-expanded="false"
+      >
+        <span aria-hidden="true">☰</span>
+      </button>
+      <a class="brand" href="#getting-started" aria-label="外销通用报表&数据看板UI 首页">
+        <span>
+          <strong>外销通用报表&数据看板UI</strong>
+          <small>Skill documentation</small>
+        </span>
+      </a>
+      <span class="version" id="version"></span>
+    </header>
+
+    <div class="shell">
+      <aside class="sidebar" id="sidebar" aria-label="文档目录">
+        <nav id="navigation"></nav>
+      </aside>
+      <main class="content" id="main-content" tabindex="-1">
+        <div id="page"></div>
+      </main>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <script src="./icons.js"></script>
+    <script src="./catalog.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>
