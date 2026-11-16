@@ -116,8 +116,67 @@
 - 中文：阿里巴巴普惠体
 - English：Inter
 - 主数据：DIN PRO，仅用于核心数值和主要数据展示
-- CSS 字体顺序：界面文字使用 `"Report Inter", "Inter Variable", Inter, "Alibaba PuHuiTi", "PingFang SC", sans-serif`；主数据使用 `"D-DIN-PRO", "D-DIN-PRO-Bold", "DIN Pro", "DIN PRO", "Report Inter", Inter, sans-serif`
-- Inter 优先承载英文字母和普通数字；中文字符使用阿里巴巴普惠体。主数据数值使用 DIN PRO。若页面未加载对应字体文件，系统字体只能作为开发阶段回退，不作为视觉验收依据。
+- 英文、中文和主数据字体都使用本机已安装字体，不随页面打包；未安装时回退为系统字体（macOS 苹方 / San Francisco、Windows 微软雅黑 / Segoe UI），**字重必须保持对应**。
+- 生成页面必须按字重分别声明字体，不得只写字体名（如 `"Alibaba PuHuiTi"`、`Inter`）：只写字体名时，若用户只装了某一个字重（如 Bold），所有文字都会显示成该字重。按字重声明后，缺少的字重会回退到系统字体的同一字重。
+- 英文和数字的字体优先级：Inter → 阿里巴巴普惠体 → 系统字体。电脑没装 Inter 但装了普惠体时，英文和数字使用普惠体；两者都没装才使用系统字体。主数据数字：D-DIN-PRO Bold → Inter → 普惠体 → 系统字体。
+
+生成页面中固定使用以下字体声明和字体顺序：
+
+```css
+/* English: Inter, one face per weight. */
+@font-face {
+  font-family: "Report Inter";
+  font-weight: 400;
+  src: local("Inter-Regular"), local("Inter Regular");
+}
+
+@font-face {
+  font-family: "Report Inter";
+  font-weight: 500;
+  src: local("Inter-Medium"), local("Inter Medium");
+}
+
+@font-face {
+  font-family: "Report Inter";
+  font-weight: 700;
+  src: local("Inter-Bold"), local("Inter Bold");
+}
+
+/* Chinese: Alibaba PuHuiTi, one face per weight (1.0 and 2.0 names). Also covers Latin and digits when Inter is missing. */
+@font-face {
+  font-family: "Report CN";
+  font-weight: 400;
+  src: local("AlibabaPuHuiTi-Regular"), local("Alibaba PuHuiTi Regular"),
+    local("AlibabaPuHuiTi_2_55_Regular"), local("Alibaba PuHuiTi 2 55 Regular");
+}
+
+@font-face {
+  font-family: "Report CN";
+  font-weight: 500;
+  src: local("AlibabaPuHuiTi-Medium"), local("Alibaba PuHuiTi Medium"),
+    local("AlibabaPuHuiTi_2_65_Medium"), local("Alibaba PuHuiTi 2 65 Medium");
+}
+
+@font-face {
+  font-family: "Report CN";
+  font-weight: 700;
+  src: local("AlibabaPuHuiTi-Bold"), local("Alibaba PuHuiTi Bold"),
+    local("AlibabaPuHuiTi_2_85_Bold"), local("Alibaba PuHuiTi 2 85 Bold");
+}
+
+/* Primary data: D-DIN-PRO Bold only. */
+@font-face {
+  font-family: "Report Data";
+  font-weight: 700;
+  src: local("D-DIN-PRO-Bold"), local("D-DIN-PRO Bold");
+}
+
+/* 界面文字 */
+font-family: "Report Inter", "Report CN", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+/* 主数据（DIN PRO Bold） */
+font-family: "Report Data", "Report Inter", "Report CN", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+font-weight: 700;
+```
 
 ### Font weights
 

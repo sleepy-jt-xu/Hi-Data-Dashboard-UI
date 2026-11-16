@@ -1180,12 +1180,12 @@
 
   function previewFontFamily(type) {
     if (type === "Chinese") {
-      return '"Alibaba PuHuiTi", "阿里巴巴普惠体", "PingFang SC", sans-serif';
+      return '"Report CN", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif';
     }
     if (type === "Primary Data") {
-      return '"D-DIN-PRO", "D-DIN-PRO-Bold", "DIN Pro", "DIN PRO", "Report Inter", Inter, sans-serif';
+      return '"Report Data", "Report Inter", "Report CN", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif';
     }
-    return '"Report Inter", "Inter Variable", Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+    return '"Report Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif';
   }
 
   function renderTextColorGroup(group) {

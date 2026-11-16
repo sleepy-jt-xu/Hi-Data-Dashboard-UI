@@ -5,12 +5,11 @@ import { buildIconsScript } from "./import-icons.mjs";
 
 const directory = dirname(fileURLToPath(import.meta.url));
 const icons = await buildIconsScript();
-const [html, styleSource, catalog, app, interFont] = await Promise.all([
+const [html, styles, catalog, app] = await Promise.all([
   readFile(join(directory, "index.html"), "utf8"),
   readFile(join(directory, "styles.css"), "utf8"),
   readFile(join(directory, "catalog.js"), "utf8"),
-  readFile(join(directory, "app.js"), "utf8"),
-  readFile(join(directory, "assets/fonts/InterVariable.ttf"))
+  readFile(join(directory, "app.js"), "utf8")
 ]);
 
 const logo = await readFile(join(directory, "../assets/logo.svg"));
@@ -21,11 +20,6 @@ const appSource = app
   .replace('"../assets/logo.svg"', JSON.stringify(logoDataUrl))
   .replace('"../assets/digital-store-bg.png"', JSON.stringify(backgroundDataUrl));
 
-const interDataUrl = `data:font/ttf;base64,${interFont.toString("base64")}`;
-const styles = styleSource.replace(
-  "./assets/fonts/InterVariable.ttf",
-  interDataUrl
-);
 
 const safeScript = (content) => content.replaceAll("</script", "<\\/script");
 const standalone = html
